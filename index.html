@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-MZ">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CSONHOS - Nampula Food Delivery</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial, sans-serif}
+body{background:#f5f5f5}
+header{background:#000;color:#fff;padding:15px;text-align:center}
+.logo{font-size:28px;font-weight:bold;letter-spacing:3px}
+.logo span{color:#FF6B00}
+.switch{background:#fff;padding:20px;text-align:center;border-bottom:2px solid #eee}
+.btn-big{padding:16px 20px;border-radius:30px;border:none;font-size:15px;font-weight:bold;width:90%;max-width:380px;margin:8px;cursor:pointer}
+.btn-black{background:#000;color:#fff}
+.btn-orange{background:#FF6B00;color:#fff}
+.hero{background:linear-gradient(135deg,#000 0%,#222 100%);color:#fff;padding:35px 20px;text-align:center}
+.hero h1{font-size:28px;line-height:1.2}
+.hero h1 span{color:#FF6B00}
+.rests{padding:20px}
+.card{background:#fff;border-radius:12px;padding:15px;width:170px;box-shadow:0 2px 8px rgba(0,0,0,0.1);display:inline-block;margin:8px;vertical-align:top}
+.order-box{background:#222;border:1px solid #444;border-radius:12px;padding:20px;margin:20px 0;color:#fff}
+.code{color:#FF6B00;font-size:20px;font-weight:bold}
+.badge{background:#FF6B00;color:#000;padding:4px 10px;border-radius:10px;font-size:11px;font-weight:bold;float:right}
+input,select{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #ccc;font-size:15px}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">C<span>SONHOS</span></div>
+<div style="font-size:13px;color:#aaa;margin-top:5px">Nampula • Tudo Ao Teu Alcance</div>
+</header>
+
+<div class="switch">
+<p style="margin-bottom:12px;font-weight:bold">ESCOLHE O QUE QUERES VER:</p>
+<button class="btn-big btn-black" onclick="show('cliente')">1️⃣ SITE DO CLIENTE<br><small>Escolhes, Pedes, Recebes</small></button>
+<button class="btn-big btn-orange" onclick="show('coord')">2️⃣ PAINEL COORDENADOR<br><small>Recebe pedidos com CÓDIGO</small></button>
+</div>
+
+<!-- CLIENTE -->
+<div id="cliente">
+<div class="hero">
+<h1>Em Nampula, a tua comida favorita a <span>um clique</span></h1>
+<p style="margin-top:10px;color:#ccc">Também na web. Sem sair de casa. Recebes em casa.</p>
+<p style="margin-top:15px;font-size:12px;color:#FF6B00">✓ M-Pesa • ✓ e-Mola • ✓ Entrega rápida</p>
+</div>
+
+<div class="rests">
+<h3>🍽️ Restaurantes em Nampula</h3>
+<div style="margin-top:15px">
+<div class="card"><img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=200" style="width:100%;height:90px;object-fit:cover;border-radius:8px"><h4 style="margin:8px 0">Casa do Grelhado</h4><p style="font-size:12px;color:#777">30-45 min • ⭐4.8</p><p style="font-size:12px;margin-top:5px">Frango 650MT • Peixe 550MT</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200" style="width:100%;height:90px;object-fit:cover;border-radius:8px"><h4 style="margin:8px 0">Pizzaria Nampula</h4><p style="font-size:12px;color:#777">25-40 min • ⭐4.9</p><p style="font-size:12px;margin-top:5px">Pizza 550MT</p></div>
+<div class="card"><img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=200" style="width:100%;height:90px;object-fit:cover;border-radius:8px"><h4 style="margin:8px 0">Mariscos da Ilha</h4><p style="font-size:12px;color:#777">40-60 min • ⭐4.7</p><p style="font-size:12px;margin-top:5px">Camarão 850MT</p></div>
+</div>
+
+<div style="background:#fff;padding:20px;border-radius:12px;margin-top:25px;max-width:450px">
+<h3>🧪 Teste - Fazer Pedido</h3>
+<p style="font-size:13px;color:#777;margin:8px 0">Isso é o que o cliente faz. O pedido vai para o Coordenador com CÓDIGO.</p>
+<input id="nome" placeholder="Teu nome (ex: Amina)">
+<input id="tel" placeholder="Telefone 84...">
+<select id="prato">
+<option>Frango Grelhado Inteiro - 650MT</option>
+<option>Meio Frango + Xima - 450MT</option>
+<option>Pizza Margherita - 550MT</option>
+<option>Camarão Grelhado - 850MT</option>
+</select>
+<input id="bairro" placeholder="Endereço - Bairro, rua, casa">
+<select id="pag"><option>M-Pesa</option><option>e-Mola</option><option>Dinheiro</option></select>
+<button onclick="pedir()" style="background:#FF6B00;color:#fff;width:100%;padding:15px;border:none;border-radius:10px;font-weight:bold;font-size:16px;margin-top:10px">Pedir Agora - Receber em casa</button>
+<p id="result" style="margin-top:15px;font-weight:bold;text-align:center"></p>
+</div>
+</div>
+</div>
+
+<!-- COORDENADOR -->
+<div id="coord" style="display:none;background:#111;min-height:100vh;padding:20px;color:#fff">
+<h2 style="color:#FF6B00">🔑 PAINEL COORDENADOR - CSONHOS</h2>
+<p style="color:#aaa;font-size:13px;margin:10px 0">Todos os pedidos caem aqui primeiro. Você recebe com CÓDIGO, confirma e envia para restaurante. Você controla a comissão.</p>
+
+<div class="order-box">
+<span class="badge">NOVO PEDIDO</span>
+<div class="code">#CSON-847</div>
+<p style="margin:15px 0;line-height:1.8">
+👤 <b>Cliente:</b> Amina - 84 123 4567<br>
+🏪 <b>Restaurante:</b> Casa do Grelhado<br>
+🍗 <b>Itens:</b> Frango Grelhado Inteiro 650MT + Xima 100MT + Coca 80MT<br>
+💰 <b>Total:</b> 830MT + Entrega 150MT = <b style="color:#FF6B00">980MT PAGO via M-Pesa</b><br>
+💸 <b>Sua comissão (15%):</b> 124MT<br>
+📍 <b>Endereço:</b> Bairro Muahivire, Rua 5, Casa 123<br>
+⏰ <b>Hora:</b> 19:23 - Hoje
+</p>
+<button onclick="alert('✅ PEDIDO #CSON-847 ACEITO!\n\n1. WhatsApp enviado para Casa do Grelhado\n2. Cliente recebeu: Seu pedido está sendo preparado\n3. Entregador notificado\n\nVocê ganhou 124MT neste pedido.')" style="background:#FF6B00;color:#fff;padding:12px 20px;border:none;border-radius:20px;font-weight:bold;margin-right:8px">✓ Aceitar e Enviar p/ Restaurante</button>
+<button onclick="alert('Ligando para 84 123 4567...')" style="background:#333;color:#fff;padding:12px 18px;border:none;border-radius:20px">📞 Ligar</button>
+<button onclick="alert('Pedido #CSON-847 recusado')" style="background:transparent;border:1px solid #555;color:#aaa;padding:12px 18px;border-radius:20px;margin-left:8px">Recusar</button>
+</div>
+
+<div class="order-box" style="opacity:0.7">
+<span class="badge" style="background:#00C851">ENTREGUE</span>
+<div class="code">#CSON-846</div>
+<p style="margin:10px 0">João 82 987 6543 - Pizzaria Nampula - Pizza 4 Queijos 650MT - Total 800MT - Entregue 19:00 - Comissão 97MT</p>
+</div>
+
+<div class="order-box" style="opacity:0.7">
+<span class="badge" style="background:#00C851">ENTREGUE</span>
+<div class="code">#CSON-845</div>
+<p style="margin:10px 0">Fatima 84 555 1122 - Mariscos da Ilha - Camarão 850MT - Total 1000MT - Entregue 18:30 - Comissão 127MT</p>
+</div>
+
+<div style="background:#1a1a1a;border-radius:12px;padding:15px;margin-top:20px;border:1px solid #333">
+<h4 style="color:#FF6B00">Resumo Hoje</h4>
+<p style="margin-top:10px;line-height:1.8">Pedidos: 3<br>Faturamento: 2.780MT<br>Sua comissão: 348MT<br>Entregas: 3</p>
+</div>
+
+</div>
+
+<script>
+function show(id){
+document.getElementById('cliente').style.display='none';
+document.getElementById('coord').style.display='none';
+document.getElementById(id).style.display='block';
+window.scrollTo(0,0);
+}
+function pedir(){
+let codigo='CSON-'+Math.floor(100+Math.random()*900);
+let nome=document.getElementById('nome').value||'Cliente';
+document.getElementById('result').innerHTML='✅ Pedido <span style="color:#FF6B00">'+codigo+'</span> enviado!<br><small>Foi para o Coordenador. Olha no Painel Coordenador.</small>';
+alert('PEDIDO CONFIRMADO '+codigo+'!\n\nCliente: '+nome+'\nPedido: '+document.getElementById('prato').value+'\n\n➡️ Agora vai para PAINEL COORDENADOR\n➡️ Coordenador recebe com código '+codigo+'\n➡️ Ele aceita e envia para restaurante\n\nÉ assim que funciona o HiGet e vai ser o Csonhos!');
+show('coord');
+}
+show('cliente');
+</script>
+
+</body>
+</html>
